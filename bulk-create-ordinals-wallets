@@ -1,0 +1,15 @@
+import subprocess
+import json
+
+def generate_wallets():
+    wallets = []
+    for i in range(777):
+        result = subprocess.run(['F:\\CORE\\ORD\\ord', '--cookie-file', 'F:\\CORE\\.cookie', 'wallet', 'receive'], capture_output=True, text=True)
+        wallet_address = result.stdout.strip()
+        wallets.append({'index': i, 'address': wallet_address})
+
+    with open('wallets.json', 'w') as f:
+        json.dump(wallets, f, indent=4)
+
+if __name__ == '__main__':
+    generate_wallets()
