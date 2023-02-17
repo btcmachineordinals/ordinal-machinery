@@ -1,21 +1,22 @@
 import subprocess
 import json
 import time
+import os
 
 # Parameters
 num_inscriptions = 100
-start_num = 21
+start_num = 1
 batch_size = 10
-fee_rate = 5.0
+fee_rate = 20.0
 
 # File to store the inscriptions
 inscriptions_file = 'operators-inscriptions.json'
 
 # Create empty inscriptions file or read existing file
-try:
+if os.path.exists(inscriptions_file):
     with open(inscriptions_file, 'r') as f:
         inscriptions = json.load(f)
-except FileNotFoundError:
+else:
     inscriptions = []
 
 # Keep track of the last successful inscription number
