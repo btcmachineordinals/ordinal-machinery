@@ -28,7 +28,7 @@ Open the inscribe_images.py file and modify the image_range variable to specify 
 
 In the terminal, run the following command to start inscribing the images to the Bitcoin blockchain:
 
-python3 inscribe_images.py
+python3 bulk-ordinal-inscription-advanced.py
 
 This will start the inscription process. The script will automatically create a file named inscriptions.json in the root directory of the repository to store the inscriptions.
 
