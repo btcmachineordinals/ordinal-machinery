@@ -1,0 +1,9 @@
+import subprocess
+
+# List of image paths to inscribe
+image_paths = ["C:\\Users\\Papo\\Documents\\Render\\BTCMACHINES\\operators\\build\\images\\{}.png".format(i) for i in range(1, 100)]
+
+# Loop through the images and inscribe them
+for image_path in image_paths:
+    # Inscribe the image
+    subprocess.run(['F:\\CORE\\ORD\\ord', '--cookie-file', 'F:\\CORE\\.cookie', 'wallet', 'inscribe', image_path, '--fee-rate', '10.0'])
