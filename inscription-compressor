@@ -2,7 +2,7 @@ from PIL import Image
 import os
 
 # set the path to your image directory
-image_dir = r'C:\Users\Kevin\Documents\Render\BTCMACHINES\operators\build\images'
+image_dir = r'C:\Users\PAPO\Documents\Render\BTCMACHINES\operators\build\images'
 
 # set the desired size for the images
 size = (400, 400)
