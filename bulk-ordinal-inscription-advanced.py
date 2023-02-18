@@ -16,7 +16,7 @@ else:
 last_index = max([int(i) for i in operators.keys()], default=0)
 
 # List of image paths to inscribe
-image_paths = ["C:\\Users\\Kevin\\Documents\\Render\\BTCMACHINES\\operators\\build\\images\\{}.png".format(i) for i in range(110, 200)]
+image_paths = ["C:\\Users\\PAPO\\Documents\\Render\\BTCMACHINES\\operators\\build\\images\\{}.png".format(i) for i in range(110, 200)]
 
 # Loop through the images and inscribe them
 for index, image_path in enumerate(image_paths):
