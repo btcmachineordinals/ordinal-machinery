@@ -1,7 +1,7 @@
 BEEP BOOP🤖
 Machined by PAPO https://twitter.com/papozorus
 Co-founder of BTC MACHINE
-https://btcmachine.com
+https://btcmachine.org
 https://discord.gg/btcmachine
 https://twitter.com/btcordinal
 
