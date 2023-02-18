@@ -1,0 +1,17 @@
+from PIL import Image
+import os
+
+# set the path to your image directory
+image_dir = r'C:\Users\Kevin\Documents\Render\BTCMACHINES\operators\build\images'
+
+# set the desired size for the images
+size = (400, 400)
+
+# loop through all images in the directory and resize/compress them
+for filename in os.listdir(image_dir):
+    if filename.endswith('.png'):
+        image_path = os.path.join(image_dir, filename)
+        with Image.open(image_path) as im:
+            im.thumbnail(size)
+            im.save(image_path, optimize=True)
+# make sure to use pip install Pillow to install the Pillow Library
