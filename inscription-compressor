@@ -1,17 +1,20 @@
+#fixed and updated by Bitcoinjake09 2/16/23 thank you
 from PIL import Image
 import os
 
 # set the path to your image directory
-image_dir = r'C:\Users\PAPO\Documents\Render\BTCMACHINES\operators\build\images'
+image_dir = r'Images'
 
 # set the desired size for the images
-size = (400, 400)
+perc = 0.12 #percent you want image lowered too 0.5 is 50%
 
 # loop through all images in the directory and resize/compress them
 for filename in os.listdir(image_dir):
     if filename.endswith('.png'):
         image_path = os.path.join(image_dir, filename)
         with Image.open(image_path) as im:
+            h, w = im.size
+            size = ((w*perc), (h*perc))
             im.thumbnail(size)
             im.save(image_path, optimize=True)
 # make sure to use pip install Pillow to install the Pillow Library
