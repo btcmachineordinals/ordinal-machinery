@@ -1,0 +1,20 @@
+import json
+import csv
+# This script will extract the addresses from your json file and add them to a csv that you can use to Send To Many on Sparrow
+# Open the JSON file and load the data
+with open('C:\\Users\\PAPO\\Documents\\Render\\BTCMACHINES\\operators\\wallets.json', 'r') as json_file:
+    data = json.load(json_file)
+
+# Extract the Bitcoin addresses from the data
+addresses = []
+for entry in data:
+    address = entry['address']
+    address_dict = json.loads(address)
+    bitcoin_address = address_dict['address']
+    addresses.append(bitcoin_address)
+
+# Write the addresses to a CSV file
+with open('bitcoin_addresses.csv', 'w', newline='') as csv_file:
+    writer = csv.writer(csv_file)
+    for address in addresses:
+        writer.writerow([address])
