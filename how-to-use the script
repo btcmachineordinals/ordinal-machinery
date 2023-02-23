@@ -22,13 +22,21 @@ Run the following command to install the required Python packages:
 
 pip3 install requests
 
-In the images directory, add the images you wish to inscribe. Note that the images must be in PNG format and have a resolution of 128x128.
+first edit bulk-create-ordinals-wallets with right path to ord and .cookie then run it 
+python3 bulk-create-ordinals-wallets 
 
-Open the inscribe_images.py file and modify the image_range variable to specify the range of images you wish to inscribe. For example, if you wish to inscribe images 1 to 17, set image_range = range(1, 18).
+then edit extract-addresses with right path to wallets.json and run it
+python3 extract-addresses
+
+now you should have bitcoin_addresses.csv open it and send sats to each adress u want to use 
+
+In the images directory, add the images you wish to inscribe. Note that the images must be in PNG
+
+Open the bulk-ordinal-inscription-advanced.py file and modify the image_range variable to specify the range of images you wish to inscribe. For example, if you wish to inscribe images 1 to 17, set image_range = range(1, 18).
 
 In the terminal, run the following command to start inscribing the images to the Bitcoin blockchain:
 
-python3 inscribe_images.py
+python3 bulk-ordinal-inscription-advanced.py
 
 This will start the inscription process. The script will automatically create a file named inscriptions.json in the root directory of the repository to store the inscriptions.
 
