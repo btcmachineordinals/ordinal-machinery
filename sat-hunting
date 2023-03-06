@@ -1,0 +1,47 @@
+import csv
+import requests
+from bs4 import BeautifulSoup
+
+# Define the input and output file paths
+input_file = r"C:\Users\papo\Documents\Render\BTCMACHINES\operators\output2.csv"
+output_file = r"C:\Users\papo\Documents\Render\BTCMACHINES\operators\output3.csv"
+
+# Define the URL to crawl and the headers
+url = "https://ordinals.com/sat/"
+headers = {'User-Agent': 'Mozilla/5.0'}
+
+# Define a function to extract the block value and timestamp
+def extract_data(sat_value):
+    print(f"Crawling data for sat value: {sat_value}")
+    block_url = url + sat_value
+    response = requests.get(block_url, headers=headers)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    block_elem = soup.find('a', href=lambda x: x and "/block/" in x)
+    block_value = block_elem.text.strip() if block_elem else 'N/A'
+    timestamp_elem = soup.find('time', {'title': True})
+    timestamp = timestamp_elem['title'] if timestamp_elem else ''
+    rarity_elem = soup.find('span', {'class': ['common', 'uncommon', 'rare', 'epic', 'legendary']})
+    rarity = rarity_elem.text.strip() if rarity_elem else ''
+    return block_value, timestamp, rarity
+
+# Open the input and output files
+with open(input_file, 'r') as f_input, open(output_file, 'w', newline='') as f_output:
+    # Define the csv reader and writer
+    csv_reader = csv.reader(f_input)
+    csv_writer = csv.writer(f_output)
+    
+    # Write the header row to the output file
+    header = next(csv_reader)
+    header.extend(['block', 'timestamp', 'rarity'])
+    csv_writer.writerow(header)
+    
+    # Loop through the rows in the input file
+    for i, row in enumerate(csv_reader):
+        if i == 0:
+            continue
+        if i > 760:
+            break
+        sat_value = row[1]
+        block_value, timestamp, rarity = extract_data(sat_value)
+        row.extend([block_value, timestamp, rarity])
+        csv_writer.writerow(row)
