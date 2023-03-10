@@ -1,0 +1,28 @@
+import csv
+import subprocess
+
+# Read inscriptions from csv
+with open('C:/Users/papo/BTCMACHINE/operator_filtered - cleaned.csv', 'r') as inscriptions_file:
+    inscriptions_reader = csv.DictReader(inscriptions_file)
+    inscriptions = [row['inscriptions'] for row in inscriptions_reader]
+
+# Read addresses from csv
+with open('C:/Users/papo/BTCMACHINE/approved-address - Sheet2.csv', 'r') as addresses_file:
+    addresses_reader = csv.DictReader(addresses_file)
+    addresses = [row['address'] for row in addresses_reader]
+
+# Send inscriptions to addresses using ord command
+results = []
+for i in range(min(len(inscriptions), len(addresses), 36)):
+    cmd = f"ord --cookie-file E:/bitcoin/.cookie wallet send {addresses[i]} {inscriptions[i]} --fee-rate 10.0"
+    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, cwd='E:/bitcoin/wallet', shell=True)
+    output, error = process.communicate()
+    results.append(output.decode().strip())
+
+# Write results to new csv file
+with open('confirmed_transactions.csv', 'w', newline='') as csvfile:
+    fieldnames = ['address', 'inscription', 'tx']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writeheader()
+    for i in range(len(results)):
+        writer.writerow({'address': addresses[i], 'inscription': inscriptions[i], 'tx': results[i]})
